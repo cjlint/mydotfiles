@@ -22,10 +22,13 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 set autoindent
-" this setting clashed with ale omnifunc
-" filetype plugin indent on
+" filetype plugin clashed with ale omnifunc.
+" It may still be useful for files where I don't have ale set up
+filetype indent on
 set hlsearch
 set autowrite
+set foldmethod=syntax
+set nofoldenable
 
 " Use local project vim settings, securely
 set exrc
@@ -61,24 +64,48 @@ let g:go_gopls_options = ["-remote=auto", "-vv", "-logfile=/tmp/gopls.log"]
 let g:ale_completion_enabled = 1
 let g:ale_completion_delay = 0
 set omnifunc=ale#completion#OmniFunc
+" Files for which I don't have an ale language server set up,
+" turn on default autocompletion
+autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS noci
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css,scss,html filetype plugin on
+
 set updatetime=1000
 " Use C-j/k to jump to next/previous errors
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " Use Enter in normal mode to auto import symbol
 nmap <silent> <Return> <Plug>(ale_import)
+" Use g-Enter to open definition
+nmap <silent> g<Return> <Plug>(ale_go_to_definition_in_tab)
+" Use f-Enter to find references
+nmap <silent> f<Return> <Plug>(ale_find_references)
+" Open file under cursor in new tab by default
+nnoremap gf <c-w>gf
+nnoremap gF <c-w>gF
+" Use space to fold/unfold
+nnoremap <space> za
+
 " Use tab to autocomplete first omnifunc result
+" TODO this doesn't work well if an option is already selected from the list
+" (it picks the next option instead of the one that's selected)
 inoremap <expr> <Tab> pumvisible() ? "\<Down>\<Return>" : "\<Tab>"
 
 let g:ale_fixers = {
 \   '*': ['trim_whitespace'],
 \   'python': ['ruff', 'black'],
-\   'javascript': ['eslint']
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'scss': ['prettier'],
+\   'html': ['prettier'],
+\   'elixir': ['mix_format'],
 \}
 let g:ale_linters = {
-\   'sql': ['sqlfluff', 'sql-language-server']
+\   'sql': ['sqlfluff', 'sql-language-server'],
+\   'elixir': ['credo', 'mix']
 \}
 let g:ale_fix_on_save = 1
+let g:ale_elixir_elixir_ls_release = $HOME . '/bin/elixir-ls'
 
 " let g:LanguageClient_serverCommands = {
 " \   'sql': ['sql-language-server', 'up', '--method', 'stdio'],
