@@ -95,6 +95,8 @@ let g:ale_fixers = {
 \   '*': ['trim_whitespace'],
 \   'python': ['ruff', 'black'],
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier'],
 \   'html': ['prettier'],
