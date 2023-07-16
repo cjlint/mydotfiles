@@ -1,4 +1,30 @@
 " Configuration file for vim
+
+" https://github.com/junegunn/vim-plug
+call plug#begin()
+" general
+Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'https://tpope.io/vim/commentary.git'
+
+" color scheme
+Plug 'sainnhe/everforest'
+
+" language-specific
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'ap/vim-css-color'
+Plug 'jparise/vim-graphql'
+Plug 'fatih/vim-go'
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+" You can revert the settings after the call like so:
+"   filetype indent off   " Disable file-type-specific indentation
+"   syntax off            " Disable syntax highlighting
+filetype plugin off
+syntax on
+
 set modelines=0		" CVE-2007-2438
 
 " Normally we use vim-extensions. If you want true vi-compatibility
@@ -14,7 +40,6 @@ au BufWrite /private/etc/pw.* set nowritebackup nobackup
 let skip_defaults_vim=1
 
 set number
-syntax on
 set background=dark
 colorscheme everforest
 
