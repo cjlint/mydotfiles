@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = CJ Linton
+	email = clinton.2742@gmail.com
+	signingkey = /Users/cjlinton/.ssh/id_ed25519.pub
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[core]
+	excludesfile = /Users/cjlinton/.gitignore
