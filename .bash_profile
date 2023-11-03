@@ -26,6 +26,15 @@ alias gc='git checkout'
 __git_complete gc _git_checkout
 alias gb='git branch'
 __git_complete gb _git_branch
+alias findport='sudo lsof -n -i | grep LISTEN'
+
+function pvim {
+  if [ -n "$*" ]; then
+    git ls-files | fzf --print0 -q "$*" | xargs -0 -o nvim
+  else
+    git ls-files | fzf --print0 | xargs -0 -o nvim
+  fi
+}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/cjlinton/google-cloud-sdk/path.bash.inc' ]; then . '/Users/cjlinton/google-cloud-sdk/path.bash.inc'; fi

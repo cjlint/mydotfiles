@@ -53,6 +53,7 @@ require("mason-lspconfig").setup({
 		"tailwindcss",
 		"lua_ls",
 		"vimls",
+		"bashls",
 	},
 })
 
@@ -69,6 +70,7 @@ lspconfig.tailwindcss.setup({
 })
 lspconfig.lua_ls.setup({ capabilities = capabilities })
 lspconfig.vimls.setup({ capabilities = capabilities })
+lspconfig.bashls.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
