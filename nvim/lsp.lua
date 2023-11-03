@@ -45,6 +45,17 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup language servers.
+require'mason'.setup()
+require'mason-lspconfig'.setup {
+  ensure_installed = {
+    "tsserver",
+    "graphql",
+    "tailwindcss",
+    "lua_ls",
+    "vimls"
+  },
+}
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup { capabilities = capabilities }
@@ -52,10 +63,12 @@ lspconfig.graphql.setup {
   capabilities = capabilities,
   filetypes = { "graphql", "typescript", "javascript", "typescriptreact", "javascriptreact" }
 }
-lspconfig.eslint.setup { capabilities = capabilities }
-lspconfig.tailwindcss.setup { capabilities = capabilities }
+lspconfig.tailwindcss.setup {
+  autostart = false,
+  capabilities = capabilities
+}
 lspconfig.lua_ls.setup { capabilities = capabilities }
-lspconfig.python.setup { capabilities = capabilities }
+lspconfig.vimls.setup { capabilities = capabilities }
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

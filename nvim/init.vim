@@ -3,11 +3,13 @@
 " https://github.com/junegunn/vim-plug
 call plug#begin()
 " general
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'sbdchd/neoformat'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'https://tpope.io/vim/commentary.git'
 Plug 'github/copilot.vim'
+Plug 'mfussenegger/nvim-lint'
+Plug 'mhartington/formatter.nvim'
 
 " nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -22,12 +24,9 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'sainnhe/everforest'
 
 " language-specific
-Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'jparise/vim-graphql'
 Plug 'mustache/vim-mustache-handlebars'
-" Plug 'fatih/vim-go'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -61,20 +60,13 @@ set hlsearch
 set autowrite
 set foldmethod=syntax
 set nofoldenable
-
-" Neoformat
-let g:neoformat_try_node_exe = 1
-let g:neoformat_handlebars_prettierglimmer = {
-            \ 'exe': 'prettier',
-            \ 'args': ['--parser', 'glimmer'],
-            \ 'replace': 1,
-            \ 'stdin': 1,
-            \ 'env': ["DEBUG=1"],
-            \ 'valid_exit_codes': [0, 23],
-            \ 'no_append': 1,
-            \ }
-
-let g:neoformat_enabled_handlebars = ['prettierglimmer']
-autocmd BufWritePre * Neoformat
+set mouse=
 
 source ~/.config/nvim/lsp.lua
+source ~/.config/nvim/formatter.lua
+source ~/.config/nvim/lint.lua
+
+au BufWritePost * FormatWrite
+au BufReadPost,InsertLeave,TextChanged * lua require('lint').try_lint()
+
+nnoremap <silent> <space>f :Format<CR>
