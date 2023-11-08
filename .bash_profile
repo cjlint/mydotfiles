@@ -1,3 +1,4 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/go/bin
 export GPG_TTY=$(tty)
@@ -38,11 +39,11 @@ function pvim {
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/cjlinton/google-cloud-sdk/path.bash.inc' ]; then . '/Users/cjlinton/google-cloud-sdk/path.bash.inc'; fi
-export CLOUDSDK_PYTHON=/usr/local/bin/python3
+export CLOUDSDK_PYTHON=/opt/homebrew/bin/python3
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/cjlinton/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/cjlinton/google-cloud-sdk/completion.bash.inc'; fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
