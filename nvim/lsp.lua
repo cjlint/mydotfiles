@@ -54,6 +54,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"vimls",
 		"bashls",
+    "omnisharp",
 	},
 })
 
@@ -65,12 +66,12 @@ lspconfig.graphql.setup({
 	filetypes = { "graphql", "typescript", "javascript", "typescriptreact", "javascriptreact" },
 })
 lspconfig.tailwindcss.setup({
-	autostart = false,
 	capabilities = capabilities,
 })
 lspconfig.lua_ls.setup({ capabilities = capabilities })
 lspconfig.vimls.setup({ capabilities = capabilities })
 lspconfig.bashls.setup({ capabilities = capabilities })
+lspconfig.omnisharp.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
