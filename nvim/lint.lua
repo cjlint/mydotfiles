@@ -4,4 +4,6 @@ require("lint").linters_by_ft = {
 	javascript = { "eslint_d" },
 	javascriptreact = { "eslint_d" },
 	graphql = { "eslint_d" },
+	-- python = { "mypy" },
+	terraform = { "tflint" },
 }

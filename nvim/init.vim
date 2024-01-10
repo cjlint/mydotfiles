@@ -7,9 +7,9 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'github/copilot.vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'mhartington/formatter.nvim'
+Plug 'sheerun/vim-polyglot'
 
 " nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -24,14 +24,14 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'sainnhe/everforest'
 
 " language-specific
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
 Plug 'jparise/vim-graphql'
 Plug 'mustache/vim-mustache-handlebars'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 filetype plugin indent off
-syntax on
+syntax off
 
 set modelines=0		" CVE-2007-2438
 
@@ -44,8 +44,6 @@ set backspace=2		" more powerful backspacing
 au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
 " Don't write backup file if vim is being called by "chpass"
 au BufWrite /private/etc/pw.* set nowritebackup nobackup
-
-let skip_defaults_vim=1
 
 set number
 set background=dark

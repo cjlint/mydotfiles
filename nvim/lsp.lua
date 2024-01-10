@@ -1,5 +1,7 @@
 -- Set up nvim-cmp.
 local cmp = require("cmp")
+-- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("off")
 
 cmp.setup({
 	snippet = {
@@ -12,8 +14,8 @@ cmp.setup({
 		-- documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-n>"] = cmp.mapping.scroll_docs(-4),
+		["<C-p>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -54,7 +56,11 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"vimls",
 		"bashls",
-    "omnisharp",
+		"omnisharp",
+		"terraformls",
+		"tflint",
+		"pyright",
+		"gopls",
 	},
 })
 
@@ -72,6 +78,10 @@ lspconfig.lua_ls.setup({ capabilities = capabilities })
 lspconfig.vimls.setup({ capabilities = capabilities })
 lspconfig.bashls.setup({ capabilities = capabilities })
 lspconfig.omnisharp.setup({ capabilities = capabilities })
+lspconfig.terraformls.setup({ capabilities = capabilities })
+lspconfig.tflint.setup({ capabilities = capabilities })
+lspconfig.pyright.setup({ capabilities = capabilities })
+lspconfig.gopls.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -99,5 +109,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+	end,
+})
+
+-- vim polyglot is installed which provides good syntax highlighting
+-- however lsps also provide syntax highlighting which overrides it
+-- disable them on a case-by-case basis for now
+local disable_lsp_syntax_highlighting = {
+	["tsserver"] = true,
+}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if disable_lsp_syntax_highlighting[client.name] then
+			client.server_capabilities.semanticTokensProvider = nil
+		end
 	end,
 })
