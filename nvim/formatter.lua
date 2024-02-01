@@ -28,15 +28,7 @@ require("formatter").setup({
 				}
 			end,
 		},
-		handlebars = {
-			function()
-				return {
-					exe = "prettierd",
-					args = { "--parser", "glimmer" },
-					stdin = true,
-				}
-			end,
-		},
+		["html.handlebars"] = { prettierd },
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
