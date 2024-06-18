@@ -28,7 +28,7 @@ require("formatter").setup({
 				}
 			end,
 		},
-		["html.handlebars"] = { prettierd },
+		handlebars = { prettierd },
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},

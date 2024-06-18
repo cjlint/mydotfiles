@@ -10,6 +10,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'mhartington/formatter.nvim'
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-tree/nvim-tree.lua'
 
 " nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -27,6 +28,7 @@ Plug 'sainnhe/everforest'
 " Plug 'ap/vim-css-color'
 Plug 'jparise/vim-graphql'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'nvim-lua/plenary.nvim'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -63,6 +65,7 @@ set mouse=
 source ~/.config/nvim/lsp.lua
 source ~/.config/nvim/formatter.lua
 source ~/.config/nvim/lint.lua
+source ~/.config/nvim/tree.lua
 
 au BufWritePost * FormatWrite
 au BufReadPost,InsertLeave,TextChanged * lua require('lint').try_lint()

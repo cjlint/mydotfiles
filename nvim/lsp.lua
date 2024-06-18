@@ -61,6 +61,7 @@ require("mason-lspconfig").setup({
 		"tflint",
 		"pyright",
 		"gopls",
+		"dockerls",
 	},
 })
 
@@ -82,6 +83,7 @@ lspconfig.terraformls.setup({ capabilities = capabilities })
 lspconfig.tflint.setup({ capabilities = capabilities })
 lspconfig.pyright.setup({ capabilities = capabilities })
 lspconfig.gopls.setup({ capabilities = capabilities })
+lspconfig.dockerls.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
