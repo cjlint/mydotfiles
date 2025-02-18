@@ -1,7 +1,7 @@
 -- Set up nvim-cmp.
 local cmp = require("cmp")
--- vim.lsp.set_log_level("debug")
-vim.lsp.set_log_level("off")
+vim.lsp.set_log_level("info")
+--vim.lsp.set_log_level("off")
 
 cmp.setup({
 	snippet = {
@@ -60,8 +60,9 @@ require("mason-lspconfig").setup({
 		"terraformls",
 		"tflint",
 		"pyright",
-		"gopls",
+		--"gopls",
 		"dockerls",
+		"rust_analyzer",
 	},
 })
 
@@ -74,6 +75,19 @@ lspconfig.graphql.setup({
 })
 lspconfig.tailwindcss.setup({
 	capabilities = capabilities,
+	filetypes = { "html", "html.handlebars", "handlebars", "hbs", "css" },
+	init_options = {
+		userLanguages = {
+			["html.handlebars"] = "handlebars",
+		},
+	},
+	settings = {
+		tailwindCSS = {
+			includeLanguages = {
+				["html.handlebars"] = "handlebars",
+			},
+		},
+	},
 })
 lspconfig.lua_ls.setup({ capabilities = capabilities })
 lspconfig.vimls.setup({ capabilities = capabilities })
@@ -82,8 +96,9 @@ lspconfig.omnisharp.setup({ capabilities = capabilities })
 lspconfig.terraformls.setup({ capabilities = capabilities })
 lspconfig.tflint.setup({ capabilities = capabilities })
 lspconfig.pyright.setup({ capabilities = capabilities })
-lspconfig.gopls.setup({ capabilities = capabilities })
+--lspconfig.gopls.setup({ capabilities = capabilities })
 lspconfig.dockerls.setup({ capabilities = capabilities })
+lspconfig.rust_analyzer.setup({ capabilities = capabilities })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

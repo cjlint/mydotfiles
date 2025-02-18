@@ -1,14 +1,23 @@
 local eslint_d = require("formatter.defaults.eslint_d")
 local prettierd = require("formatter.defaults.prettierd")
+local prettier = require("formatter.defaults.prettier")
 
 require("formatter").setup({
 	logging = true,
 	log_level = vim.log.levels.WARN,
 	filetype = {
-		typescript = { eslint_d, prettierd },
-		typescriptreact = { eslint_d, prettierd },
-		javascript = { eslint_d, prettierd },
-		javascriptreact = { eslint_d, prettierd },
+		rust = {
+			function()
+				return {
+					exe = "rustfmt",
+				}
+			end,
+		},
+		typescript = { eslint_d, prettier },
+		typescriptreact = { eslint_d, prettier },
+		javascript = { eslint_d, prettier },
+		javascriptreact = { eslint_d, prettier },
+		html = { prettierd },
 		graphql = { eslint_d, prettierd },
 		json = { prettierd },
 		markdown = { prettierd },
