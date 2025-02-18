@@ -11,6 +11,8 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'mhartington/formatter.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'charlespascoe/vim-go-syntax'
 
 " nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -32,8 +34,8 @@ Plug 'nvim-lua/plenary.nvim'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
-filetype plugin indent off
-syntax off
+filetype plugin indent on
+syntax on
 
 set modelines=0		" CVE-2007-2438
 

@@ -20,8 +20,15 @@ require("formatter").setup({
 		html = { prettierd },
 		graphql = { eslint_d, prettierd },
 		json = { prettierd },
+		toml = { prettierd },
 		markdown = { prettierd },
 		python = {
+			function()
+				return {
+					exe = "ruff",
+					args = { "check", "--select", "I", "--fix" },
+				}
+			end,
 			function()
 				return {
 					exe = "ruff",

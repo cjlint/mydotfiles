@@ -60,11 +60,19 @@ require("mason-lspconfig").setup({
 		"terraformls",
 		"tflint",
 		"pyright",
-		--"gopls",
 		"dockerls",
 		"rust_analyzer",
+		"ruff_lsp",
+		"gopls",
 	},
 })
+
+local on_attach = function(client, bufnr)
+	if client.name == "ruff_lsp" then
+		-- Disable hover in favor of Pyright
+		client.server_capabilities.hoverProvider = false
+	end
+end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
@@ -95,10 +103,15 @@ lspconfig.bashls.setup({ capabilities = capabilities })
 lspconfig.omnisharp.setup({ capabilities = capabilities })
 lspconfig.terraformls.setup({ capabilities = capabilities })
 lspconfig.tflint.setup({ capabilities = capabilities })
-lspconfig.pyright.setup({ capabilities = capabilities })
---lspconfig.gopls.setup({ capabilities = capabilities })
-lspconfig.dockerls.setup({ capabilities = capabilities })
-lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+})
+lspconfig.ruff_lsp.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+lspconfig.gopls.setup({ capabilities = capabilities })
+require("go").setup()
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
