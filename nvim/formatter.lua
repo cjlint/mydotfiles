@@ -9,7 +9,9 @@ require("formatter").setup({
 		rust = {
 			function()
 				return {
-					exe = "rustfmt",
+					exe = "cargo",
+					args = { "fmt", "--", "-q", "--emit", "stdout" },
+					stdin = true,
 				}
 			end,
 		},
