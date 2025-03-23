@@ -9,8 +9,8 @@ require("formatter").setup({
 		rust = {
 			function()
 				return {
-					exe = "cargo",
-					args = { "fmt", "--", "-q", "--emit", "stdout" },
+					exe = "rustfmt",
+					args = { "--edition", "2024", "-q", "--emit", "stdout" },
 					stdin = true,
 				}
 			end,
